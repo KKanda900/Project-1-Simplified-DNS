@@ -3,4 +3,6 @@ mx.rutgers.edu 192.64.4.2 A
 kill.cs.rutgers.edu 182.48.3.2 A
 www.ibm.com 64.42.3.4 A
 www.google.com 8.6.4.2 A
-localhost - NS
+www.amazon.com 99.84.34.1 A
+www.walmart.com 23.200.229 A
+ilab1.cs.rutgers.edu - NS

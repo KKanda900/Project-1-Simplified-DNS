@@ -4,3 +4,8 @@ www.ibm.edu
 google.com
 www.google.com
 MX.RUTGERS.EDU
+www.amazon.com
+NO_ENTRY
+amazon.com
+www.walmart.com
+www.ibm.com
