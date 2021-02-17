@@ -1,3 +1,8 @@
+'''
+@author: Karun Kanda (kk951)
+@author: Shila Basu (sb1825)
+'''
+
 import time
 import random
 import socket, sys
