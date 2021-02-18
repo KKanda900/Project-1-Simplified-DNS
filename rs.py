@@ -4,6 +4,14 @@
 '''
 
 import time, random, socket, sys
+
+class RSTable:
+    rsdns_table = []
+    localhost_line = None
+
+    def __init__(self):
+        rsdns_table = []
+        localhost_line = None
  
 '''
 create_rsdns_table does not take any arguments and returns a dictionary of the DNS table found 
@@ -14,16 +22,18 @@ that the RS server can iterate this table and give the client the corresponding 
 matches with the domain name given or the TS server that might have information on the domain name. 
 '''
 def create_rsdns_table():
-    rsdns_table = []
+    table = RSTable()
     index = 0
 
     file = open("PROJI-DNSRS.txt", "r")
     for info in file:
         tokens = info.split()
-        rsdns_table.append((tokens[0], tokens[1], tokens[2]))
+        table.rsdns_table.append((tokens[0], tokens[1], tokens[2]))
+        if tokens[2] == 'NS':
+            table.localhost_line = tokens[0] + " " + tokens[1] + " " + tokens[2]
         index+=1
     
-    return rsdns_table
+    return table
 
 '''
 check_hostname_table takes in two arguments, the queried hostname from the client and the RS server table
@@ -39,11 +49,11 @@ Where the A should tell the client just to output the results and NS should tell
 didn't have the information that it needed so pass the domain name to the corresponding TS server.
 '''
 def check_hostname_table(queried_hostname, table):
-    for i in range(0, len(table)):
-        if table[i][0].lower() == queried_hostname.lower():
-            return '{} {} {}'.format(table[i][0], table[i][1], table[i][2])
+    for i in range(0, len(table.rsdns_table)):
+        if table.rsdns_table[i][0].lower() == queried_hostname.lower():
+            return '{} {} {}'.format(table.rsdns_table[i][0], table.rsdns_table[i][1], table.rsdns_table[i][2])
     
-    return '{} {} {}'.format(table[len(table)-1][0], table[len(table)-1][1], table[len(table)-1][2])
+    return table.localhost_line
 
 '''
 rs_server takes in no arguments and doesn't return anything because this is where the RS server is going to 
