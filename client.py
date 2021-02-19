@@ -64,6 +64,8 @@ def client():
         tokens = server_string.split()
         if tokens[2] == 'A':
             print(server_string)
+            f = open("RESOLVED.txt", "a")
+            f.write(server_string + "\n")
         elif tokens[2] == 'NS':
             # if the second token isn't an A and if its an "NS" then the client should go to "ask" the TS server
             try:
@@ -87,8 +89,12 @@ def client():
             tokens = server_string.split()
             if tokens[2] == 'A':
                 print(server_string)
+                f = open("RESOLVED.txt", "a")
+                f.write(server_string + "\n")
             else:
                 print(server_string)
+                f = open("RESOLVED.txt", "a")
+                f.write(server_string + "\n")
 
     cs.close()
     exit()
@@ -101,4 +107,7 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Incorrect Usage: python client.py <hostname> <RS server port number> <TS server port number>")
         sys.exit(1)
+
+    f = open("RESOLVED.txt","w")
+    f.close()
     client()
